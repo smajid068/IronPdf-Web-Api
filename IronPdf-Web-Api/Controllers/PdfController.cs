@@ -20,7 +20,6 @@ namespace HtmlToPdfApi.Controllers
                 var urlDownloadPathDirectory = "https://localhost:5001/GeneratedPdfs/";
                 
                 //Use IronPDF to render Html to Pdf
-                IronPdf.License.LicenseKey = "IRONSUITE.DEVTEAM.IX5994-1B96F73E10-AVL72YRY2OX-LTOAP6UCU5AX-XPVWHC2RK6V6-4SUIBDY6NH57-GGVE6ZAQDR3X-MCYFIIXNHXKE-RGY7Q6-L62LNUAI4R22EA-ENTERPRISE-42GQE6.RENEW.SUPPORT.29.MAY.2034";
                 var renderer = new ChromePdfRenderer();
                 var pdf = renderer.RenderHtmlAsPdf(request.HtmlContent);
                 
@@ -47,7 +46,6 @@ namespace HtmlToPdfApi.Controllers
                 var urlDownloadPathDirectory = "https://localhost:5001/GeneratedPdfs/";
 
                 //Use IronPDF to render a Webpage URL to Pdf
-                IronPdf.License.LicenseKey = "IRONSUITE.DEVTEAM.IX5994-1B96F73E10-AVL72YRY2OX-LTOAP6UCU5AX-XPVWHC2RK6V6-4SUIBDY6NH57-GGVE6ZAQDR3X-MCYFIIXNHXKE-RGY7Q6-L62LNUAI4R22EA-ENTERPRISE-42GQE6.RENEW.SUPPORT.29.MAY.2034";
                 var renderer = new ChromePdfRenderer();
                 var pdf = renderer.RenderUrlAsPdf(request.HtmlUrl);
                 var (uploadFileName, uploadFilePath) = FilePathUtils.GetFilePath();

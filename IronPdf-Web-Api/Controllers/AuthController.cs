@@ -1,4 +1,5 @@
-﻿using IronPdf_Web_Api.Models;
+﻿using IronPdf_Web_Api;
+using IronPdf_Web_Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -31,6 +32,8 @@ namespace HtmlToPdfApi.Controllers
                     claims: claims,
                     expires: DateTime.Now.AddHours(1),
                     signingCredentials: credentials);
+
+                IronPdf.License.LicenseKey = Constants.IronLicenseKey;
 
                 return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
             }
