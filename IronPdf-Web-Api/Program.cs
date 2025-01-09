@@ -30,6 +30,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Ensure UseStaticFiles is enabled
@@ -55,6 +58,9 @@ app.UseRouting(); // Ensure routing middleware is enabled
 // Middleware for authentication and authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger(); // Enables Swagger
+app.UseSwaggerUI(); // Enables Swagger UI
 
 app.MapControllers();
 
