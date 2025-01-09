@@ -1,0 +1,6 @@
+@IronPdf_Web_Api_HostAddress = http://localhost:7168
+
+GET {{IronPdf_Web_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
