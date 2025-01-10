@@ -1,3 +1,5 @@
 .vs
 IronPdf-Web-Api/bin/
 IronPdf-Web-Api/obj/
+IronPdf-Web-Api/GeneratedImages/
+IronPdf-Web-Api/GeneratedPdfs/

@@ -13,7 +13,7 @@ namespace HtmlToPdfApi.Controllers
     public class PdfController : ControllerBase
     {
         [HttpPost("generatePdfFromHtmlString")]
-        public IActionResult GeneratePdfFromHtmlString([FromBody] PdfRequestFromHtmlString request)
+        public IActionResult GeneratePdfFromHtmlString([FromBody] PdfFromHtmlStringRequest request)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace HtmlToPdfApi.Controllers
         }
 
         [HttpPost("generatePdfFromHtmlUrl")]
-        public IActionResult GeneratePdfFromHtmlUrl([FromBody] PdfRequestFromHtmlUrl request)
+        public IActionResult GeneratePdfFromHtmlUrl([FromBody] PdfFromHtmlUrlRequest request)
         {
             try
             {
@@ -56,6 +56,29 @@ namespace HtmlToPdfApi.Controllers
                 urlDownloadPathDirectory = $"{urlDownloadPathDirectory}{uploadFileName}";
 
                 return Ok(new { filePath = urlDownloadPathDirectory });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+        [HttpPost("extractPdfAsImages")]
+        public IActionResult ExtractPdfAsImages([FromBody] ImagesFromPdfRequest request)
+        {
+            try
+            {
+                var pdf         = PdfDocument.FromUrl(new Uri(request.PdfFilePath));
+                var pdfAsImages = pdf.ToPngImages("GeneratedImages/test_*.png");
+                // Normalize paths to use forward slashes
+                pdfAsImages = pdfAsImages.Select(path => path.Replace("\\", "/")).ToArray();
+
+                for (int i = 0; i < pdfAsImages.Length; i++)
+                {
+                    pdfAsImages[i] = $"https://localhost:5001/{pdfAsImages[i]}";
+                }
+
+                return Ok(new { imageFilePaths = pdfAsImages });
             }
             catch (Exception ex)
             {

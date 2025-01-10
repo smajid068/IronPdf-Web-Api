@@ -39,17 +39,32 @@ var app = builder.Build();
 app.UseStaticFiles();
 
 // Map the "GeneratedPdfs" folder to be accessible via localhost
-var basePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), "GeneratedPdfs");
+var baseImagePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), "GeneratedImages");
 
-if (!Directory.Exists(basePathDirectory))
+if (!Directory.Exists(baseImagePathDirectory))
 {
-    Directory.CreateDirectory(basePathDirectory);
+    Directory.CreateDirectory(baseImagePathDirectory);
 }
 
 // Add the static file middleware for the GeneratedPdfs directory
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(basePathDirectory),
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(baseImagePathDirectory),
+    RequestPath = "/GeneratedImages" // This will map to localhost:5001/GeneratedPdfs
+});
+
+// Map the "GeneratedPdfs" folder to be accessible via localhost
+var basePdfPathDirectory = Path.Combine(Directory.GetCurrentDirectory(), "GeneratedPdfs");
+
+if (!Directory.Exists(basePdfPathDirectory))
+{
+    Directory.CreateDirectory(basePdfPathDirectory);
+}
+
+// Add the static file middleware for the GeneratedPdfs directory
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(basePdfPathDirectory),
     RequestPath = "/GeneratedPdfs" // This will map to localhost:5001/GeneratedPdfs
 });
 
