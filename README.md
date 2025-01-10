@@ -27,3 +27,7 @@ Function- API call to generate a Pdf from Html String using IronPDF.
 Endpoint- api/pdf/generatePdfFromUrl
 <br>
 Function- API call to generate a Pdf from a webpage Url using IronPDF.
+<br>
+<br>
+Endpoint-api/pdf/extractPdfAsImages
+Function- API call to download a stored Pdf as images (one image per page).
