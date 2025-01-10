@@ -30,4 +30,5 @@ Function- API call to generate a Pdf from a webpage Url using IronPDF.
 <br>
 <br>
 Endpoint-api/pdf/extractPdfAsImages
+<br>
 Function- API call to download a stored Pdf as images (one image per page).
